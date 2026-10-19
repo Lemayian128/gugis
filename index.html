@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMUST · BSc (Math, Econ & IT) · Fees & Payment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #eef2f7 0%, #d9e2ec 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .card {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 20, 40, 0.35), 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.25s ease;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .card:hover {
+            transform: scale(1.005);
+        }
+
+        /* ---------- HEADER (with badge placeholder) ---------- */
+        .header {
+            background: #0a2e4e;
+            background: linear-gradient(120deg, #0b2a44 0%, #123b5e 100%);
+            padding: 1.8rem 2.2rem;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 4px solid #f4b942;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Stylized badge placeholder – replace with actual logo img if you have a URL */
+        .badge-placeholder {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f4b942 0%, #d99a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #0a2e4e;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.25);
+            flex-shrink: 0;
+        }
+
+        .badge-placeholder i {
+            font-size: 1.8rem;
+        }
+
+        .header-left h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .header-left .subhead {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-top: 0.3rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .band-badge {
+            background: #f4b942;
+            color: #0a2e4e;
+            font-weight: 700;
+            padding: 0.45rem 1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        /* ---------- STUDENT INFO (now includes name & reg) ---------- */
+        .student-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2.2rem;
+            background: #f9fcff;
+            border-bottom: 1px solid #d0dfec;
+            font-size: 0.95rem;
+            color: #1e3a5e;
+        }
+
+        .student-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .student-name {
+            font-weight: 700;
+            color: #0a2e4e;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .student-name i {
+            color: #f4b942;
+        }
+
+        .student-reg {
+            font-size: 0.85rem;
+            color: #4a6e8f;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .student-reg i {
+            color: #1d5a87;
+        }
+
+        .programme {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .programme i {
+            color: #0f4b6e;
+            font-size: 1.2rem;
+        }
+
+        .semester-tag {
+            background: #e1ebf5;
+            padding: 0.35rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #0a2e4e;
+        }
+
+        /* ---------- FEE DASHBOARD ---------- */
+        .fee-dashboard {
+            padding: 1.5rem 2.2rem 1.8rem;
+        }
+
+        .fee-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .fee-header h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #0c2b44;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .fee-header h2 i {
+            color: #f4b942;
+        }
+
+        .currency-note {
+            font-size: 0.85rem;
+            color: #4c6a85;
+            background: #eef3f9;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            font-weight: 500;
+        }
+
+        /* ---------- FEE LIST ---------- */
+        .fee-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .fee-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 1.2rem;
+            background: #f9fcff;
+            border-radius: 16px;
+            transition: background 0.15s;
+            border: 1px solid #e0ecf7;
+        }
+
+        .fee-row:hover {
+            background: #edf4fd;
+            border-color: #bdd3e8;
+        }
+
+        .fee-label {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 500;
+            color: #153e5c;
+            font-size: 1rem;
+        }
+
+        .fee-label i {
+            width: 20px;
+            color: #1d5a87;
+            font-size: 1.1rem;
+        }
+
+        .fee-amount {
+            font-weight: 700;
+            color: #0a2e4e;
+            font-size: 1.1rem;
+            letter-spacing: 0.3px;
+            background: #ffffff;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            border: 1px solid #c9ddef;
+        }
+
+        .total-row {
+            background: #0a2e4e;
+            background: linear-gradient(115deg, #0c2d48, #15466b);
+            border-radius: 20px;
+            padding: 1.2rem 1.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.4rem;
+            box-shadow: 0 12px 18px -8px rgba(0, 20, 40, 0.4);
+            border: 1px solid #2a5e85;
+        }
+
+        .total-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #f0f7ff;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .total-label i {
+            color: #f4b942;
+        }
+
+        .total-amount {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #f4b942;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.15);
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* ---------- BANK ACCOUNTS SECTION ---------- */
+        .bank-section {
+            background: #f0f6fd;
+            padding: 1.5rem 2.2rem 2rem;
+            border-top: 2px solid #c8d9ec;
+        }
+
+        .bank-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0a2e4e;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .bank-section h3 i {
+            color: #f4b942;
+        }
+
+        .bank-note {
+            font-size: 0.85rem;
+            color: #3d5d7c;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #e6eff9;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            border-left: 4px solid #f4b942;
+        }
+
+        .bank-note i {
+            color: #0a2e4e;
+        }
+
+        .bank-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .bank-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 0.9rem 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            border: 1px solid #d3e3f5;
+            transition: transform 0.1s, border-color 0.15s;
+        }
+
+        .bank-card:hover {
+            border-color: #aac2dd;
+            transform: translateY(-1px);
+        }
+
+        .bank-name {
+            font-weight: 700;
+            color: #0a2e4e;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .bank-name i {
+            color: #f4b942;
+            font-size: 0.9rem;
+        }
+
+        .bank-account {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #15466b;
+            letter-spacing: 0.5px;
+            background: #eef4fc;
+            padding: 0.2rem 0.6rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 0.2rem 0;
+        }
+
+        .bank-branch {
+            font-size: 0.78rem;
+            color: #4a6e8f;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.2rem;
+        }
+
+        .payment-tips {
+            background: #e1edf9;
+            border-radius: 14px;
+            padding: 0.9rem 1.2rem;
+            font-size: 0.85rem;
+            color: #1f4463;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem 1.5rem;
+            border: 1px dashed #99b8d6;
+        }
+
+        .payment-tips i {
+            color: #0a2e4e;
+            margin-right: 0.2rem;
+        }
+
+        /* ---------- DOWNLOAD BUTTON ---------- */
+        .download-section {
+            padding: 0 2.2rem 1.8rem;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+        }
+
+        .download-btn {
+            background: linear-gradient(115deg, #0a2e4e, #15466b);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            box-shadow: 0 8px 20px -6px rgba(10, 46, 78, 0.5);
+            transition: all 0.2s ease;
+            border: 1px solid #2a5e85;
+        }
+
+        .download-btn i {
+            color: #f4b942;
+            font-size: 1.2rem;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(115deg, #123b5e, #1c5a85);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -6px rgba(10, 46, 78, 0.6);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ---------- FOOTER ---------- */
+        .footer-note {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            padding: 1.2rem 2.2rem;
+            background: #ffffff;
+            border-top: 1px solid #c8d9ec;
+            font-size: 0.85rem;
+            color: #2d4e6d;
+        }
+
+        .band-highlight {
+            background: #0a2e4e;
+            color: #f4b942;
+            font-weight: 700;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: 0.2px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .band-highlight i {
+            color: #ffd966;
+        }
+
+        .motto {
+            font-style: italic;
+            opacity: 0.8;
+            font-size: 0.85rem;
+        }
+
+        /* ---------- SEMESTER SELECTOR ---------- */
+        .semester-selector {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .semester-selector button {
+            background: #ffffff;
+            border: 1.5px solid #b6cde0;
+            color: #1a3d5c;
+            font-weight: 600;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .semester-selector button.active {
+            background: #0a2e4e;
+            border-color: #0a2e4e;
+            color: white;
+            box-shadow: 0 4px 10px rgba(10, 46, 78, 0.3);
+        }
+
+        .semester-selector button:hover {
+            background: #d9e6f5;
+            border-color: #8aaecf;
+        }
+
+        .semester-selector button.active:hover {
+            background: #15466b;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 680px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .header-brand {
+                width: 100%;
+            }
+
+            .header-left h1 {
+                font-size: 1.5rem;
+            }
+
+            .student-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+                padding: 1rem 1.5rem;
+            }
+
+            .fee-dashboard {
+                padding: 1.2rem 1.5rem;
+            }
+
+            .fee-row {
+                padding: 0.7rem 1rem;
+            }
+
+            .fee-label {
+                font-size: 0.9rem;
+            }
+
+            .fee-amount {
+                font-size: 1rem;
+                padding: 0.2rem 0.8rem;
+            }
+
+            .total-row {
+                padding: 1rem 1.2rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.6rem;
+            }
+
+            .total-amount {
+                font-size: 1.6rem;
+                align-self: flex-end;
+            }
+
+            .bank-section {
+                padding: 1.2rem 1.5rem;
+            }
+
+            .download-section {
+                padding: 0 1.5rem 1.5rem;
+            }
+
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-note {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* ---------- PRINT STYLES ---------- */
+        @media print {
+            body {
+                background: #ffffff !important;
+                padding: 0 !important;
+                display: block !important;
+            }
+
+            .card {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                max-width: 100% !important;
+                border: none !important;
+            }
+
+            .card:hover {
+                transform: none !important;
+            }
+
+            .semester-selector,
+            .download-section,
+            .header .band-badge {
+                display: none !important;
+            }
+
+            .header {
+                background: #0a2e4e !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .total-row,
+            .bank-section,
+            .footer-note,
+            .fee-row,
+            .bank-card,
+            .badge-placeholder {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .fee-row:hover,
+            .bank-card:hover {
+                background: inherit !important;
+                transform: none !important;
+            }
+
+            .footer-note {
+                border-top: 1px solid #c8d9ec;
+            }
+
+            .print-header {
+                display: block !important;
+                text-align: center;
+                font-size: 0.8rem;
+                color: #4a6e8f;
+                padding-top: 0.5rem;
+            }
+        }
+
+        .print-header {
+            display: none;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fee-row, .total-row, .band-badge, .bank-card {
+            animation: fadeSlide 0.4s ease forwards;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card" id="feesCard">
+    <!-- Header: MMUST + badge placeholder + band 4 -->
+    <div class="header">
+        <div class="header-brand">
+            <div class="badge-placeholder" title="MMUST Official Badge (placeholder)">
+                <i class="fas fa-university"></i>
+            </div>
+            <div class="header-left">
+                <h1>MMUST</h1>
+                <div class="subhead">
+                    <i class="fas fa-graduation-cap"></i> 
+                    Masinde Muliro University of Science and Technology
+                </div>
+            </div>
+        </div>
+        <div class="band-badge" id="bandBadge">
+            <i class="fas fa-layer-group"></i> BAND 4
+        </div>
+    </div>
+
+    <!-- Student / programme info with NAME & REG NO -->
+    <div class="student-info">
+        <div class="student-details">
+            <div class="student-name">
+                <i class="fas fa-user-graduate"></i> LEMAYIAN KIMORGO
+            </div>
+            <div class="student-reg">
+                <i class="fas fa-id-card"></i> Reg. No: SME/B/01-04712/2023
+            </div>
+            <div class="programme">
+                <i class="fas fa-chart-line"></i> BSc. Mathematics, Economics with IT
+            </div>
+        </div>
+        <div class="semester-tag" id="semesterDisplay">
+            <i class="fas fa-calendar-alt"></i> Semester 1 · 2025/2026
+        </div>
+    </div>
+
+    <!-- Fee dashboard -->
+    <div class="fee-dashboard">
+        <div class="fee-header">
+            <h2>
+                <i class="fas fa-receipt"></i> 
+                Fees Structure
+            </h2>
+            <div class="currency-note">
+                <i class="fas fa-coins"></i> KES
+            </div>
+        </div>
+
+        <!-- interactive semester toggle -->
+        <div class="semester-selector">
+            <button id="sem1Btn" class="active" data-sem="1">Semester 1</button>
+            <button id="sem2Btn" data-sem="2">Semester 2</button>
+            <span style="font-size: 0.8rem; color: #4d6f8f; margin-left: 0.4rem;">
+                <i class="fas fa-sync-alt"></i> fee same both semesters
+            </span>
+        </div>
+
+        <!-- Fee breakdown -->
+        <div class="fee-list">
+            <div class="fee-row">
+                <span class="fee-label">
+                    <i class="fas fa-book-open"></i> Tuition & academic services
+                </span>
+                <span class="fee-amount">68,000</span>
+            </div>
+            <div class="fee-row">
+                <span class="fee-label">
+                    <i class="fas fa-building"></i> ICT & library services
+                </span>
+                <span class="fee-amount">14,500</span>
+            </div>
+            <div class="fee-row">
+                <span class="fee-label">
+                    <i class="fas fa-flask"></i> Science & computer lab
+                </span>
+                <span class="fee-amount">12,000</span>
+            </div>
+            <div class="fee-row">
+                <span class="fee-label">
+                    <i class="fas fa-user-graduate"></i> Student welfare & activities
+                </span>
+                <span class="fee-amount">9,500</span>
+            </div>
+            <div class="fee-row">
+                <span class="fee-label">
+                    <i class="fas fa-heartbeat"></i> Medical & insurance
+                </span>
+                <span class="fee-amount">5,000</span>
+            </div>
+            <div class="fee-row">
+                <span class="fee-label">
+                    <i class="fas fa-id-card"></i> Registration & examination
+                </span>
+                <span class="fee-amount">3,000</span>
+            </div>
+        </div>
+
+        <!-- total -->
+        <div class="total-row" id="totalRow">
+            <div class="total-label">
+                <i class="fas fa-calculator"></i> TOTAL per semester
+            </div>
+            <div class="total-amount" id="totalAmount">112,000</div>
+        </div>
+    </div>
+
+    <!-- ========== APPROVED BANK ACCOUNTS ========== -->
+    <div class="bank-section">
+        <h3>
+            <i class="fas fa-university"></i> Approved Bank Accounts for Fee Payment
+        </h3>
+        <div class="bank-note">
+            <i class="fas fa-exclamation-circle"></i> 
+            Use <strong>only</strong> these official MMUST accounts. Other accounts are not valid.
+        </div>
+
+        <div class="bank-grid">
+            <div class="bank-card">
+                <div class="bank-name"><i class="fas fa-credit-card"></i> KCB Bank</div>
+                <div class="bank-account">1101922109</div>
+                <div class="bank-branch"><i class="fas fa-map-pin"></i> Kakamega Branch</div>
+            </div>
+            <div class="bank-card">
+                <div class="bank-name"><i class="fas fa-credit-card"></i> Equity Bank</div>
+                <div class="bank-account">500294636103</div>
+                <div class="bank-branch"><i class="fas fa-map-pin"></i> Kakamega Branch</div>
+            </div>
+            <div class="bank-card">
+                <div class="bank-name"><i class="fas fa-credit-card"></i> Co-operative Bank</div>
+                <div class="bank-account">1129033999900</div>
+                <div class="bank-branch"><i class="fas fa-map-pin"></i> Kakamega Branch</div>
+            </div>
+            <div class="bank-card">
+                <div class="bank-name"><i class="fas fa-credit-card"></i> National Bank of Kenya</div>
+                <div class="bank-account">1003070554000</div>
+                <div class="bank-branch"><i class="fas fa-map-pin"></i> Kakamega Branch</div>
+            </div>
+        </div>
+
+        <div class="payment-tips">
+            <span><i class="fas fa-check-circle"></i> <strong>Reference:</strong> Full Names + Registration Number</span>
+            <span><i class="fas fa-mobile-alt"></i> <strong>M-Pesa:</strong> Use student portal → generate invoice → pay via M-Pesa</span>
+        </div>
+    </div>
+
+    <!-- ========== DOWNLOAD BUTTON ========== -->
+    <div class="download-section">
+        <button class="download-btn" id="downloadBtn">
+            <i class="fas fa-download"></i> Download Fees Structure (PDF)
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-note">
+        <div class="band-highlight" id="footerBand">
+            <i class="fas fa-check-circle"></i> Band 4 · fee structure
+        </div>
+        <div class="motto" id="semesterFooterNote">
+            <i class="fas fa-clock"></i> Valid for Semester 1 · 2025/2026
+        </div>
+    </div>
+
+    <!-- Print-only header (appears when printing/saving as PDF) -->
+    <div class="print-header">
+        Official Fees Structure · LEMAYIAN KIMORGO (SME/B/01-04712/2023) · Generated on <span id="printDate"></span> · MMUST Band 4
+    </div>
+</div>
+
+<script>
+    (function() {
+        // --- CONFIGURATION ---
+        const SEMESTER_FEE = 112000;
+        const BAND = 4;
+        const PROGRAMME = "BSc. Mathematics, Economics with IT";
+        const ACADEMIC_YEAR = "2025/2026";
+        const STUDENT_NAME = "LEMAYIAN KIMORGO";
+        const REG_NO = "SME/B/01-04712/2023";
+
+        // DOM elements
+        const totalAmountEl = document.getElementById('totalAmount');
+        const bandBadge = document.getElementById('bandBadge');
+        const footerBand = document.getElementById('footerBand');
+        const semesterDisplay = document.getElementById('semesterDisplay');
+        const semesterFooterNote = document.getElementById('semesterFooterNote');
+        const sem1Btn = document.getElementById('sem1Btn');
+        const sem2Btn = document.getElementById('sem2Btn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const printDateEl = document.getElementById('printDate');
+
+        // Current active semester tracker
+        let currentSemester = 1;
+
+        // --- HELPERS ---
+        function setTotalFee(amount) {
+            totalAmountEl.textContent = amount.toLocaleString('en-KE');
+        }
+
+        function enforceBandFour() {
+            bandBadge.innerHTML = `<i class="fas fa-layer-group"></i> BAND ${BAND}`;
+            footerBand.innerHTML = `<i class="fas fa-check-circle"></i> Band ${BAND} · fee structure`;
+            setTotalFee(SEMESTER_FEE);
+        }
+
+        function setActiveSemester(sem) {
+            currentSemester = sem;
+
+            if (sem === 1) {
+                sem1Btn.classList.add('active');
+                sem2Btn.classList.remove('active');
+            } else {
+                sem2Btn.classList.add('active');
+                sem1Btn.classList.remove('active');
+            }
+
+            const semText = `Semester ${sem} · ${ACADEMIC_YEAR}`;
+            semesterDisplay.innerHTML = `<i class="fas fa-calendar-alt"></i> ${semText}`;
+            semesterFooterNote.innerHTML = `<i class="fas fa-clock"></i> Valid for Semester ${sem} · ${ACADEMIC_YEAR}`;
+            setTotalFee(SEMESTER_FEE);
+
+            // subtle feedback
+            const totalRow = document.getElementById('totalRow');
+            totalRow.style.transition = 'transform 0.1s';
+            totalRow.style.transform = 'scale(1.01)';
+            setTimeout(() => { totalRow.style.transform = 'scale(1)'; }, 120);
+        }
+
+        // --- DOWNLOAD (Save as PDF via print dialog) ---
+        function downloadFeesPDF() {
+            // Update print-only timestamp
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            printDateEl.textContent = now.toLocaleDateString('en-KE', options);
+
+            // Give the DOM a moment to reflect the timestamp, then trigger print
+            setTimeout(() => {
+                window.print();
+            }, 100);
+        }
+
+        // --- EVENT LISTENERS ---
+        sem1Btn.addEventListener('click', () => setActiveSemester(1));
+        sem2Btn.addEventListener('click', () => setActiveSemester(2));
+        downloadBtn.addEventListener('click', downloadFeesPDF);
+
+        // --- INIT ---
+        function init() {
+            enforceBandFour();
+            setActiveSemester(1);
+
+            if (totalAmountEl.textContent.replace(/,/g, '') !== SEMESTER_FEE.toString()) {
+                setTotalFee(SEMESTER_FEE);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        // expose helper (optional)
+        window.getFeeStructure = () => ({
+            student: STUDENT_NAME,
+            regNo: REG_NO,
+            programme: PROGRAMME,
+            band: BAND,
+            perSemester: SEMESTER_FEE,
+            currency: 'KES',
+            banks: [
+                { name: 'KCB Bank', account: '1101922109', branch: 'Kakamega' },
+                { name: 'Equity Bank', account: '500294636103', branch: 'Kakamega' },
+                { name: 'Co-operative Bank', account: '1129033999900', branch: 'Kakamega' },
+                { name: 'National Bank of Kenya', account: '1003070554000', branch: 'Kakamega' }
+            ],
+            currentSemester: currentSemester
+        });
+    })();
+</script>
+
+<noscript>
+    <style>
+        #totalAmount { font-size: 1.9rem; font-weight: 800; color: #f4b942; }
+        .band-badge, .band-highlight { background: #0a2e4e; color: #f4b942; }
+        .bank-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 0.8rem; }
+        .download-btn { display: none; }
+        .badge-placeholder { background: #f4b942; color: #0a2e4e; }
+    </style>
+</noscript>
+</body>
+</html>
